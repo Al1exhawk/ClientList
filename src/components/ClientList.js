@@ -4,7 +4,7 @@ import Client from "./Client";
 
 export default function ClientList(props) {
   return (
-    <List divided>
+    <List celled animated>
       {props.list.map((client, index) => {
         return (
           <Client
