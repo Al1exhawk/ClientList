@@ -8,6 +8,7 @@ export default function ClientList(props) {
       {props.list.map((client, index) => {
         return (
           <Client
+            onClickAction={props.onClickAction}
             key={index}
             avatar={client.general.avatar}
             name={client.general.firstName}

@@ -5,6 +5,7 @@ import { Input, Grid, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import {
   getClientList,
+  getClient,
   filterList
 } from "./actionCreators/clientsActionsCreator";
 import ClientList from "./components/ClientList";
@@ -16,16 +17,16 @@ class App extends React.Component {
 
     this.onSearchInputchange = this.onSearchInputchange.bind(this);
   }
-  onSearchInputchange(e) {
-    const { value } = e.target;
-    console.log(value);
-  }
   componentDidMount() {
     this.props.getClientList();
   }
+  onSearchInputchange(e) {
+    const { value } = e.target;
+    this.props.filterList(value);
+  }
 
   render() {
-    const { clientList, exactClient } = this.props;
+    const { clientList, exactClient, getClient } = this.props;
     return (
       <Segment>
         <Grid columns={2} divided>
@@ -34,7 +35,7 @@ class App extends React.Component {
               placeholder="Search..."
               onChange={this.onSearchInputchange}
             />
-            <ClientList list={clientList} />
+            <ClientList list={clientList} onClickAction={getClient} />
           </Grid.Column>
           <Grid.Column width={12}>
             <ClientDetail client={exactClient} />
@@ -50,5 +51,5 @@ export default connect(
     clientList: state.clientList,
     exactClient: state.exactClient
   }),
-  { getClientList, filterList }
+  { getClientList, filterList, getClient }
 )(App);
