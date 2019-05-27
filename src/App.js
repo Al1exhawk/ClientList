@@ -17,7 +17,7 @@ class App extends React.Component {
       searchValue: "",
       filtredlist: []
     };
-    this.onSearchInputchange = this.onSearchInputchange.binda(this);
+    this.onSearchInputchange = this.onSearchInputchange.bind(this);
   }
   componentDidMount() {
     this.props.getClientList();
