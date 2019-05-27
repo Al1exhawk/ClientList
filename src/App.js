@@ -5,8 +5,7 @@ import { Input, Grid, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import {
   getClientList,
-  getClient,
-  filterList
+  getClient
 } from "./actionCreators/clientsActionsCreator";
 import ClientList from "./components/ClientList";
 import ClientDetail from "./components/ClientDetail";
@@ -14,15 +13,28 @@ import ClientDetail from "./components/ClientDetail";
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.onSearchInputchange = this.onSearchInputchange.bind(this);
+    this.state = {
+      searchValue: "",
+      filtredlist: []
+    };
+    this.onSearchInputchange = this.onSearchInputchange.binda(this);
   }
   componentDidMount() {
     this.props.getClientList();
   }
   onSearchInputchange(e) {
     const { value } = e.target;
-    this.props.filterList(value);
+    const { clientList } = this.props;
+
+    this.setState({
+      //Filter
+      searchValue: { value },
+      filtredlist: clientList.filter(client => {
+        return JSON.stringify(client)
+          .toLowerCase()
+          .includes(value.toLowerCase());
+      })
+    });
   }
 
   render() {
@@ -35,7 +47,14 @@ class App extends React.Component {
               placeholder="Search..."
               onChange={this.onSearchInputchange}
             />
-            <ClientList list={clientList} onClickAction={getClient} />
+            <ClientList
+              list={
+                this.state.searchValue !== ""
+                  ? this.state.filtredlist
+                  : clientList
+              }
+              onClickAction={getClient}
+            />
           </Grid.Column>
           <Grid.Column width={12}>
             <ClientDetail client={exactClient} />
@@ -51,5 +70,5 @@ export default connect(
     clientList: state.clientList,
     exactClient: state.exactClient
   }),
-  { getClientList, filterList, getClient }
+  { getClientList, getClient }
 )(App);

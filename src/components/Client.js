@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Image, Card } from "semantic-ui-react";
+import { List, Image } from "semantic-ui-react";
 
 const Client = props => {
   const onClientClick = () => {
