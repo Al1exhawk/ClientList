@@ -28,7 +28,7 @@ function ClientDetail(props) {
             </Card>
             <Card>
               <Card.Content>
-                <Card.Header as="h5">Addres</Card.Header>
+                <Card.Header as="h5">Address</Card.Header>
                 <Card.Description>Country: {address.country}</Card.Description>
                 <Card.Description>City: {address.city}</Card.Description>
                 <Card.Description>Street: {address.street}</Card.Description>
