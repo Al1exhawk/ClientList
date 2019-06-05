@@ -3,7 +3,7 @@ import { List, Image } from "semantic-ui-react";
 
 const Client = props => {
   const onClientClick = () => {
-    props.onClickAction(props.name);
+    props.onClickAction(props.id);
   };
   return (
     <List.Item onClick={onClientClick}>

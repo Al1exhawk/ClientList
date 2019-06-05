@@ -1,8 +1,13 @@
-import { GET_CLIENT_LIST, GET_CLIENT } from "../actionCreators/clientActions";
+import {
+  GET_CLIENT_LIST,
+  GET_CLIENT,
+  FILTER_ON
+} from "../actionCreators/clientActions";
 
 const initialState = {
   clientList: [],
-  exactClient: {}
+  exactClient: {},
+  value: ""
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -12,12 +17,12 @@ export default (state = initialState, action) => {
     case GET_CLIENT: {
       return {
         ...state,
-        exactClient: state.clientList.find(client => {
-          return client.general.firstName === action.payload;
-        })
+        exactClient: state.clientList[action.payload]
       };
     }
-
+    case FILTER_ON: {
+      return { ...state, value: action.payload };
+    }
     default:
       return state;
   }
