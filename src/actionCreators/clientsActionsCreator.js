@@ -1,4 +1,8 @@
-import { GET_CLIENT_LIST, GET_CLIENT } from "../actionCreators/clientActions";
+import {
+  GET_CLIENT_LIST,
+  GET_CLIENT,
+  FILTER_ON
+} from "../actionCreators/clientActions";
 
 export const getClientList = () => dispatch => {
   const req = new XMLHttpRequest();
@@ -17,5 +21,12 @@ export const getClient = key => dispatch => {
   dispatch({
     type: GET_CLIENT,
     payload: key
+  });
+};
+
+export const filterOn = value => dispatch => {
+  dispatch({
+    type: FILTER_ON,
+    payload: value
   });
 };

@@ -17,7 +17,9 @@ export default (state = initialState, action) => {
     case GET_CLIENT: {
       return {
         ...state,
-        exactClient: state.clientList[action.payload]
+        exactClient: state.clientList.find(client => {
+          return client.general.firstName === action.payload;
+        })
       };
     }
     case FILTER_ON: {
